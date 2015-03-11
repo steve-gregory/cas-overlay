@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to Jasig under one or more contributor license
+    agreements. See the NOTICE file distributed with this work
+    for additional information regarding copyright ownership.
+    Jasig licenses this file to you under the Apache License,
+    Version 2.0 (the "License"); you may not use this file
+    except in compliance with the License.  You may obtain a
+    copy of the License at the following location:
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<!--
+| deployerConfigContext.xml centralizes into one file some of the declarative configuration that
+| all CAS deployers will need to modify.
+|
+| This file declares some of the Spring-managed JavaBeans that make up a CAS deployment.
+| The beans declared in this file are instantiated at context initialization time by the Spring
+| ContextLoaderListener declared in web.xml.  It finds this file because this
+| file is among those declared in the context parameter "contextConfigLocation".
+|
+| By far the most common change you will need to make in this file is to change the last bean
+| declaration to replace the default authentication handler with
+| one implementing your approach for authenticating usernames and passwords.
++-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--
+       | The authentication manager defines security policy for authentication by specifying at a minimum
+       | the authentication handlers that will be used to authenticate credential. While the AuthenticationManager
+       | interface supports plugging in another implementation, the default PolicyBasedAuthenticationManager should
+       | be sufficient in most cases.
+       +-->
+    <bean id="authenticationManager" class="org.jasig.cas.authentication.PolicyBasedAuthenticationManager">
+        <constructor-arg>
+            <map>
+                <!--
+                   | IMPORTANT
+                   | Every handler requires a unique name.
+                   | If more than one instance of the same handler class is configured, you must explicitly
+                   | set its name to something other than its default name (typically the simple class name).
+                   -->
+                <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
+                <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />
+            </map>
+        </constructor-arg>
+        <!-- Uncomment the metadata populator to allow clearpass to capture and cache the password
+             This switch effectively will turn on clearpass.
+        <property name="authenticationMetaDataPopulators">
+           <util:list>
+              <bean class="org.jasig.cas.extension.clearpass.CacheCredentialsMetaDataPopulator"
+                    c:credentialCache-ref="encryptedMap" />
+           </util:list>
+        </property>
+        -->
+
+        <!--
+           | Defines the security policy around authentication. Some alternative policies that ship with CAS:
+           |
+           | * NotPreventedAuthenticationPolicy - all credential must either pass or fail authentication
+           | * AllAuthenticationPolicy - all presented credential must be authenticated successfully
+           | * RequiredHandlerAuthenticationPolicy - specifies a handler that must authenticate its credential to pass
+           -->
+        <property name="authenticationPolicy">
+            <bean class="org.jasig.cas.authentication.AnyAuthenticationPolicy" />
+        </property>
+    </bean>
+
+    <!-- Required for proxy ticket mechanism. -->
+    <bean id="proxyAuthenticationHandler"
+          class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+          p:httpClient-ref="httpClient" />
+
+    <!--
+       | TODO: Replace this component with one suitable for your enviroment.
+       |
+       | This component provides authentication for the kind of credential used in your environment. In most cases
+       | credential is a username/password pair that lives in a system of record like an LDAP directory.
+       | The most common authentication handler beans:
+       |
+       | * org.jasig.cas.authentication.LdapAuthenticationHandler
+       | * org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler
+       | * org.jasig.cas.adaptors.x509.authentication.handler.support.X509CredentialsAuthenticationHandler
+       | * org.jasig.cas.support.spnego.authentication.handler.support.JCIFSSpnegoAuthenticationHandler
+       -->
+<!-- ADD LDAP ATTRIBUTE RELEASE -->
+    <!-- The handler to use for primary authentication. -->
+    <bean id="primaryAuthenticationHandler"
+          class="org.jasig.cas.authentication.LdapAuthenticationHandler"
+          p:principalIdAttribute="uid"
+          c:authenticator-ref="authenticator">
+        <property name="principalAttributeMap">
+            <map>
+                <entry key="givenName" value="firstName" />
+                <entry key="sn" value="lastName" />
+                <entry key="mail" value="email" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- The authenticator to use for LDAP authentication. -->
+    <bean id="authenticator" class="org.ldaptive.auth.Authenticator"
+          c:resolver-ref="dnResolver"
+          c:handler-ref="authHandler" />
+
+    <!-- The LDAP distinguished name resolver. -->
+    <bean id="dnResolver" class="org.ldaptive.auth.FormatDnResolver"
+          c:format="uid=%s,${ldap.baseDn}" />
+
+    <!-- The LDAP authentication handler. -->
+    <bean id="authHandler" class="org.ldaptive.auth.PooledBindAuthenticationHandler"
+          p:connectionFactory-ref="pooledLdapConnectionFactory" />
+
+    <!-- The LDAP connection factory. -->
+    <bean id="pooledLdapConnectionFactory" class="org.ldaptive.pool.PooledConnectionFactory"
+          p:connectionPool-ref="connectionPool" />
+
+    <!-- The LDAP connection pool. -->
+    <bean id="connectionPool" class="org.ldaptive.pool.BlockingConnectionPool"
+          init-method="initialize"
+          p:poolConfig-ref="ldapPoolConfig"
+          p:blockWaitTime="${ldap.pool.blockWaitTime}"
+          p:validator-ref="searchValidator"
+          p:pruneStrategy-ref="pruneStrategy"
+          p:connectionFactory-ref="connectionFactory" />
+
+    <!-- The LDAP connection pool configuration. -->
+    <bean id="ldapPoolConfig" class="org.ldaptive.pool.PoolConfig"
+          p:minPoolSize="${ldap.pool.minSize}"
+          p:maxPoolSize="${ldap.pool.maxSize}"
+          p:validateOnCheckOut="${ldap.pool.validateOnCheckout}"
+          p:validatePeriodically="${ldap.pool.validatePeriodically}"
+          p:validatePeriod="${ldap.pool.validatePeriod}" />
+
+    <!-- The factory for individual LDAP connections. -->
+    <bean id="connectionFactory" class="org.ldaptive.DefaultConnectionFactory"
+          p:connectionConfig-ref="connectionConfig" />
+
+    <!-- The LDAP connection configuration. -->
+    <bean id="connectionConfig" class="org.ldaptive.ConnectionConfig"
+          p:ldapUrl="${ldap.url}"
+          p:connectTimeout="${ldap.connectTimeout}"
+          p:useStartTLS="${ldap.useStartTLS}"
+          p:sslConfig-ref="sslConfig" />
+
+    <!-- The SSL configuration for LDAP connections. -->
+    <bean id="sslConfig" class="org.ldaptive.ssl.SslConfig"
+          p:credentialConfig-ref="credentialConfig" />
+
+    <!-- The SSL credential configuration for LDAP connections. -->
+    <bean id="credentialConfig" class="org.ldaptive.ssl.X509CredentialConfig"
+          p:trustCertificates="${ldap.trustedCert}" />
+
+    <!-- The prune strategy for connections in the LDAP pool. -->
+    <bean id="pruneStrategy" class="org.ldaptive.pool.IdlePruneStrategy"
+          p:prunePeriod="${ldap.pool.prunePeriod}"
+          p:idleTime="${ldap.pool.idleTime}" />
+
+    <!-- The LDAP search validator. -->
+    <bean id="searchValidator" class="org.ldaptive.pool.SearchValidator" />
+
+    <!-- Required for proxy ticket mechanism -->
+    <bean id="proxyPrincipalResolver"
+          class="org.jasig.cas.authentication.principal.BasicPrincipalResolver" />
+
+    <!--
+       | Resolves a principal from a credential using an attribute repository that is configured to resolve
+       | against a deployer-specific store (e.g. LDAP).
+       -->
+    <bean id="primaryPrincipalResolver"
+          class="org.jasig.cas.authentication.principal.PersonDirectoryPrincipalResolver" >
+        <property name="attributeRepository" ref="attributeRepository" />
+    </bean>
+
+    <!-- Retrieves the user attributes and group membership information. -->
+    <bean id="attributeRepository"
+          class="org.jasig.services.persondir.support.MergingPersonAttributeDaoImpl">
+        <property name="personAttributeDaos">
+            <list>
+                <ref bean="userAttributeRepository" />
+                <ref bean="groupAttributeRepository" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- Retrieves user attributes from LDAP. -->
+    <bean id="userAttributeRepository" class="org.jasig.cas.persondir.LdapPersonAttributeDao"
+          p:connectionFactory-ref="pooledLdapConnectionFactory"
+          p:baseDN="${ldap.baseDn}"
+          p:searchControls-ref="searchControls"
+          p:searchFilter="uid={0}">
+        <property name="resultAttributeMapping">
+            <map>
+                <entry key="givenName" value="firstName" />
+                <entry key="sn" value="lastName" />
+                <entry key="mail" value="email" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- Retrieves user group membership from LDAP. -->
+    <bean id="groupAttributeRepository"
+          class="org.iplantc.cas.persondir.LdapMultirecordPersonAttributeDao"
+          p:connectionFactory-ref="pooledLdapConnectionFactory"
+          p:baseDN="${ldap.groupDn}"
+          p:searchControls-ref="searchControls"
+          p:searchFilter="memberUid={0}">
+        <property name="resultAttributeMapping">
+            <map>
+                <entry key="cn" value="entitlement" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- The search controls for attribute searches. -->
+    <bean id="searchControls" class="javax.naming.directory.SearchControls" />
+
+    <!--
+    Sample, in-memory data store for the ServiceRegistry. A real implementation
+    would probably want to replace this with the JPA-backed ServiceRegistry DAO
+    The name of this bean should remain "serviceRegistryDao".
+    +-->
+    <bean id="registeredServiceProxyPolicy"
+          class="org.jasig.cas.services.RegexMatchingRegisteredServiceProxyPolicy">
+        <constructor-arg index="0" value="^https?://[^.]+[.]iplantc(?:ollaborative)?[.]org/.*" />
+    </bean>
+
+<!-- ADD LDAP ATTRIBUTE RELEASE END -->
+    <!--
+       | Resolves a principal from a credential using an attribute repository that is configured to resolve
+       | against a deployer-specific store (e.g. LDAP).
+       -->
+    <!--
+    Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
+    may go against a database or LDAP server.  The id should remain "attributeRepository" though.
+    +-->
+
+    <!--
+    Sample, in-memory data store for the ServiceRegistry. A real implementation
+    would probably want to replace this with the JPA-backed ServiceRegistry DAO
+    The name of this bean should remain "serviceRegistryDao".
+    +-->
+    <bean id="serviceRegistryDao" class="org.jasig.cas.services.InMemoryServiceRegistryDaoImpl"
+            p:registeredServices-ref="registeredServicesList" />
+
+    <util:list id="registeredServicesList">
+        <bean class="org.jasig.cas.support.oauth.services.OAuthCallbackAuthorizeService"
+              p:id="0" p:name="OAuth Callbacks" p:description="Adds support for OAuth callbacks"
+              p:serviceId="${server.prefix}/oauth2.0/callbackAuthorize" p:evaluationOrder="0" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="1" p:name="Atmosphere on Mickey" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_mickey" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://mickey.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="1"/>
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="2" p:name="Troposphere on Mickey" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_mickey" p:clientSecret="troposphere_secret"
+              p:serviceId="https://mickey.iplantc.org/cas/oauth2.0" p:evaluationOrder="2"/>
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="3" p:name="Atmosphere on Alom" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_alom" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://alom.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="3" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="4" p:name="Troposphere on Alom" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_alom" p:clientSecret="troposphere_secret"
+              p:serviceId="https://alom.iplantc.org/cas/oauth2.0" p:evaluationOrder="4" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="5" p:name="Atmosphere On Dalloway" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_dalloway" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://dalloway.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="4" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="6" p:name="Troposphere On Dalloway" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_dalloway" p:clientSecret="troposphere_secret"
+              p:serviceId="https://dalloway.iplantc.org/cas/oauth2.0" p:evaluationOrder="6" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="7" p:name="Atmosphere On Atmo" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_atmo" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://atmo.iplantcollaborative.org/oauth2.0/callbackAuthorize" p:evaluationOrder="7" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="8" p:name="Troposphere On Atmo" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_atmo" p:clientSecret="troposphere_secret"
+              p:serviceId="https://atmo.iplantcollaborative.org/cas/oauth2.0" p:evaluationOrder="8" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="9" p:name="Atmosphere On Atmo-Beta" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_atmobeta" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://atmobeta.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="9" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="10" p:name="Troposphere On Atmo-Beta" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_atmobeta" p:clientSecret="troposphere_secret"
+              p:serviceId="https://atmobeta.iplantc.org/cas/oauth2.0" p:evaluationOrder="10" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="11" p:name="Atmosphere On Fermin" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_fermin" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://fermin.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="11" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="12" p:name="Troposphere On Fermin" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_fermin" p:clientSecret="troposphere_secret"
+              p:serviceId="https://fermin.iplantc.org/cas/oauth2.0" p:evaluationOrder="12" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="13" p:name="Atmosphere On Atmo-Dev" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_atmo-dev" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://atmo-dev.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="13" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_atmo-dev" p:clientSecret="troposphere_secret"
+              p:serviceId="https://atmo-dev.iplantc.org/cas/oauth2.0" p:evaluationOrder="14" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="15" p:name="Atmosphere On CRUSHBONE" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_crushbone" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://crushbone.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="15" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="16" p:name="Troposphere On CRUSHBONE" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_crushbone" p:clientSecret="troposphere_secret"
+              p:serviceId="https://crushbone.iplantc.org/cas/oauth2.0" p:evaluationOrder="16" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="17" p:name="Atmosphere On Bandicoot" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_bandicoot" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://bandicoot.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="17" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="18" p:name="Troposphere On Bandicoot" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_bandicoot" p:clientSecret="troposphere_secret"
+              p:serviceId="https://bandicoot.iplantc.org/cas/oauth2.0" p:evaluationOrder="18" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="19" p:name="Atmosphere On Euca1" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:clientId="atmosphere_euca1" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://euca1.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="19" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="20" p:name="Troposphere On Euca1" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:clientId="troposphere_euca1" p:clientSecret="troposphere_secret"
+              p:serviceId="https://euca1.iplantc.org/cas/oauth2.0" p:evaluationOrder="20" />
+        <!-- END OAuth -->
+
+        <bean class="org.jasig.cas.services.RegexRegisteredService"
+              p:id="10000001" p:name="HTTP and IMAP" p:description="Allows HTTP(S) and IMAP(S) protocols"
+              p:serviceId="^(https?|imaps?)://.*" p:evaluationOrder="10000001"
+              p:proxyPolicy-ref="registeredServiceProxyPolicy"
+              p:attributeReleasePolicy-ref="attributeReleasePolicy" />
+
+    </util:list>
+    <!-- Defines which attributes may be released. -->
+    <bean id="attributeReleasePolicy" class="org.jasig.cas.services.ReturnAllowedAttributeReleasePolicy">
+        <property name="allowedAttributes">
+            <list>
+                <value>uid</value>
+                <value>firstName</value>
+                <value>lastName</value>
+                <value>email</value>
+                <value>entitlement</value>
+            </list>
+        </property>
+        <property name="attributeFilter">
+            <bean class="org.jasig.cas.services.support.RegisteredServiceRegexAttributeFilter"
+                  c:regex="^.*$" />
+        </property>
+    </bean>
+
+    <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
+
+    <bean id="healthCheckMonitor" class="org.jasig.cas.monitor.HealthCheckMonitor" p:monitors-ref="monitorsList" />
+
+    <util:list id="monitorsList">
+      <bean class="org.jasig.cas.monitor.MemoryMonitor" p:freeMemoryWarnThreshold="10" />
+      <!--
+        NOTE
+        The following ticket registries support SessionMonitor:
+          * DefaultTicketRegistry
+          * JpaTicketRegistry
+        Remove this monitor if you use an unsupported registry.
+      -->
+      <bean class="org.jasig.cas.monitor.SessionMonitor"
+          p:ticketRegistry-ref="ticketRegistry"
+          p:serviceTicketCountWarnThreshold="5000"
+          p:sessionCountWarnThreshold="100000" />
+    </util:list>
+</beans>
