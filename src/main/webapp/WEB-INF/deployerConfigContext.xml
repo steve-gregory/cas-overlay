@@ -89,7 +89,7 @@
     <!-- Required for proxy ticket mechanism. -->
     <bean id="proxyAuthenticationHandler"
           class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
-          p:httpClient-ref="httpClient" />
+          p:httpClient-ref="httpClient" p:requireSecure="false" />
 
     <!--
        | TODO: Replace this component with one suitable for your enviroment.
@@ -240,10 +240,10 @@
     would probably want to replace this with the JPA-backed ServiceRegistry DAO
     The name of this bean should remain "serviceRegistryDao".
     +-->
-    <bean id="registeredServiceProxyPolicy"
+    <!-- bean id="registeredServiceProxyPolicy"
           class="org.jasig.cas.services.RegexMatchingRegisteredServiceProxyPolicy">
         <constructor-arg index="0" value="^https?://[^.]+[.]iplantc(?:ollaborative)?[.]org/.*" />
-    </bean>
+    </bean -->
 
 <!-- ADD LDAP ATTRIBUTE RELEASE END -->
     <!--
@@ -352,26 +352,18 @@
         <bean class="org.jasig.cas.services.RegexRegisteredService"
               p:id="10000001" p:name="HTTP and IMAP" p:description="Allows HTTP(S) and IMAP(S) protocols"
               p:serviceId="^(https?|imaps?)://.*" p:evaluationOrder="10000001"
-              p:proxyPolicy-ref="registeredServiceProxyPolicy"
-              p:attributeReleasePolicy-ref="attributeReleasePolicy" />
+              p:allowedAttributes-ref="allowedAttributes" p:allowedToProxy="true" />
 
     </util:list>
+
     <!-- Defines which attributes may be released. -->
-    <bean id="attributeReleasePolicy" class="org.jasig.cas.services.ReturnAllowedAttributeReleasePolicy">
-        <property name="allowedAttributes">
-            <list>
-                <value>uid</value>
-                <value>firstName</value>
-                <value>lastName</value>
-                <value>email</value>
-                <value>entitlement</value>
-            </list>
-        </property>
-        <property name="attributeFilter">
-            <bean class="org.jasig.cas.services.support.RegisteredServiceRegexAttributeFilter"
-                  c:regex="^.*$" />
-        </property>
-    </bean>
+    <util:list id="allowedAttributes">
+        <value>uid</value>
+        <value>firstName</value>
+        <value>lastName</value>
+        <value>email</value>
+        <value>entitlement</value>
+    </util:list>
 
     <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
 
