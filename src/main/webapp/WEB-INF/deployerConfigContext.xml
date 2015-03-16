@@ -268,83 +268,83 @@
               p:id="0" p:name="OAuth Callbacks" p:description="Adds support for OAuth callbacks"
               p:serviceId="${server.prefix}/oauth2.0/callbackAuthorize" p:evaluationOrder="0" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="1" p:name="Atmosphere on Mickey" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="1" p:name="Atmosphere on Mickey" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_mickey" p:clientSecret="atmosphere_secret"
               p:serviceId="https://mickey.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="1"/>
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="2" p:name="Troposphere on Mickey" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="2" p:name="Troposphere on Mickey" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_mickey" p:clientSecret="troposphere_secret"
               p:serviceId="https://mickey.iplantc.org/cas/oauth2.0" p:evaluationOrder="2"/>
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="3" p:name="Atmosphere on Alom" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="3" p:name="Atmosphere on Alom" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_alom" p:clientSecret="atmosphere_secret"
               p:serviceId="https://alom.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="3" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="4" p:name="Troposphere on Alom" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="4" p:name="Troposphere on Alom" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_alom" p:clientSecret="troposphere_secret"
               p:serviceId="https://alom.iplantc.org/cas/oauth2.0" p:evaluationOrder="4" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="5" p:name="Atmosphere On Dalloway" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="5" p:name="Atmosphere On Dalloway" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_dalloway" p:clientSecret="atmosphere_secret"
               p:serviceId="https://dalloway.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="4" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="6" p:name="Troposphere On Dalloway" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="6" p:name="Troposphere On Dalloway" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_dalloway" p:clientSecret="troposphere_secret"
               p:serviceId="https://dalloway.iplantc.org/cas/oauth2.0" p:evaluationOrder="6" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="7" p:name="Atmosphere On Atmo" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="7" p:name="Atmosphere On Atmo" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_atmo" p:clientSecret="atmosphere_secret"
               p:serviceId="https://atmo.iplantcollaborative.org/oauth2.0/callbackAuthorize" p:evaluationOrder="7" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="8" p:name="Troposphere On Atmo" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="8" p:name="Troposphere On Atmo" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmo" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmo.iplantcollaborative.org/cas/oauth2.0" p:evaluationOrder="8" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="9" p:name="Atmosphere On Atmo-Beta" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="9" p:name="Atmosphere On Atmo-Beta" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_atmobeta" p:clientSecret="atmosphere_secret"
               p:serviceId="https://atmobeta.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="9" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="10" p:name="Troposphere On Atmo-Beta" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="10" p:name="Troposphere On Atmo-Beta" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmobeta" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmobeta.iplantc.org/cas/oauth2.0" p:evaluationOrder="10" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="11" p:name="Atmosphere On Fermin" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="11" p:name="Atmosphere On Fermin" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_fermin" p:clientSecret="atmosphere_secret"
               p:serviceId="https://fermin.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="11" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="12" p:name="Troposphere On Fermin" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="12" p:name="Troposphere On Fermin" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_fermin" p:clientSecret="troposphere_secret"
               p:serviceId="https://fermin.iplantc.org/cas/oauth2.0" p:evaluationOrder="12" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="13" p:name="Atmosphere On Atmo-Dev" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="13" p:name="Atmosphere On Atmo-Dev" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_atmo-dev" p:clientSecret="atmosphere_secret"
               p:serviceId="https://atmo-dev.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="13" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmo-dev" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmo-dev.iplantc.org/cas/oauth2.0" p:evaluationOrder="14" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="15" p:name="Atmosphere On CRUSHBONE" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="15" p:name="Atmosphere On CRUSHBONE" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_crushbone" p:clientSecret="atmosphere_secret"
               p:serviceId="https://crushbone.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="15" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="16" p:name="Troposphere On CRUSHBONE" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="16" p:name="Troposphere On CRUSHBONE" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_crushbone" p:clientSecret="troposphere_secret"
               p:serviceId="https://crushbone.iplantc.org/cas/oauth2.0" p:evaluationOrder="16" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="17" p:name="Atmosphere On Bandicoot" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="17" p:name="Atmosphere On Bandicoot" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_bandicoot" p:clientSecret="atmosphere_secret"
               p:serviceId="https://bandicoot.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="17" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="18" p:name="Troposphere On Bandicoot" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="18" p:name="Troposphere On Bandicoot" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_bandicoot" p:clientSecret="troposphere_secret"
               p:serviceId="https://bandicoot.iplantc.org/cas/oauth2.0" p:evaluationOrder="18" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="19" p:name="Atmosphere On Euca1" p:description="Atmosphere OAuth Service" p:approvalPrompt="auto"
+              p:id="19" p:name="Atmosphere On Euca1" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_euca1" p:clientSecret="atmosphere_secret"
               p:serviceId="https://euca1.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="19" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
-              p:id="20" p:name="Troposphere On Euca1" p:description="Troposphere - A GUI for Atmosphere" p:approvalPrompt="auto"
+              p:id="20" p:name="Troposphere On Euca1" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_euca1" p:clientSecret="troposphere_secret"
               p:serviceId="https://euca1.iplantc.org/cas/oauth2.0" p:evaluationOrder="20" />
         <!-- END OAuth -->

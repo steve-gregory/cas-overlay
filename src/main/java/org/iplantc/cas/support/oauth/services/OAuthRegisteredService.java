@@ -9,7 +9,7 @@ public final class OAuthRegisteredService extends RegexRegisteredService {
 
     private String clientSecret;
     private String clientId;
-    private String approvalPrompt;
+    private Boolean bypassApprovalPrompt = false;
 
     public String getClientId() {
         return this.clientId;
@@ -27,12 +27,12 @@ public final class OAuthRegisteredService extends RegexRegisteredService {
         this.clientSecret = clientSecret;
     }
 
-    public String getApprovalPrompt() {
-        return this.approvalPrompt;
+    public Boolean isBypassApprovalPrompt() {
+        return this.bypassApprovalPrompt;
     }
 
-    public void setApprovalPrompt(final String approvalPrompt) {
-        this.approvalPrompt = approvalPrompt;
+    public void setBypassApprovalPrompt(final Boolean bypassApprovalPrompt) {
+        this.bypassApprovalPrompt = bypassApprovalPrompt;
     }
 
     @Override
@@ -40,7 +40,7 @@ public final class OAuthRegisteredService extends RegexRegisteredService {
         final ToStringBuilder builder = new ToStringBuilder(this);
         builder.appendSuper(super.toString());
         builder.append("clientId", getClientId());
-        builder.append("approvalPrompt", getApprovalPrompt());
+        builder.append("approvalPrompt", isBypassApprovalPrompt());
         return builder.toString();
     }
 }

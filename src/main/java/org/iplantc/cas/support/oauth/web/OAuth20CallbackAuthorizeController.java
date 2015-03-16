@@ -50,12 +50,12 @@ public final class OAuth20CallbackAuthorizeController extends AbstractController
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("callbackUrl", callbackUrl);
 
-        final String approvalPrompt = (String) session.getAttribute(OAuthConstants.APPROVAL_PROMPT);
-        logger.debug("approvalPrompt : {}", approvalPrompt);
-        session.removeAttribute(OAuthConstants.APPROVAL_PROMPT);
+        final Boolean bypassApprovalPrompt = (Boolean) session.getAttribute(OAuthConstants.BYPASS_APPROVAL_PROMPT);
+        logger.debug("bypassApprovalPrompt: {}", bypassApprovalPrompt);
+        session.removeAttribute(OAuthConstants.BYPASS_APPROVAL_PROMPT);
 
         // Clients that auto-approve do not need authorization.
-        if (OAuthConstants.AUTO_APPROVE.equals(approvalPrompt)) {
+        if (bypassApprovalPrompt != null && bypassApprovalPrompt) {
             return OAuthUtils.redirectTo(callbackUrl);
         }
 
