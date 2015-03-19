@@ -2,7 +2,7 @@ package org.iplantc.cas.support.oauth.web;
 
 import org.apache.commons.lang.StringUtils;
 import org.iplantc.cas.support.oauth.OAuthConstants;
-import org.jasig.cas.support.oauth.OAuthUtils;
+import org.iplantc.cas.support.oauth.OAuthUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,6 +56,7 @@ public final class OAuth20CallbackAuthorizeController extends AbstractController
 
         // Clients that auto-approve do not need authorization.
         if (bypassApprovalPrompt != null && bypassApprovalPrompt) {
+            logger.debug("Redirect to callback based on bypassApprovalPrompt");
             return OAuthUtils.redirectTo(callbackUrl);
         }
 

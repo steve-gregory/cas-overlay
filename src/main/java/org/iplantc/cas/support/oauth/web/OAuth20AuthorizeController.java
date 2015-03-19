@@ -1,9 +1,9 @@
 package org.iplantc.cas.support.oauth.web;
 
 import org.apache.commons.lang.StringUtils;
-import org.iplantc.cas.support.oauth.services.OAuthRegisteredService;
 import org.iplantc.cas.support.oauth.OAuthConstants;
 import org.iplantc.cas.support.oauth.OAuthUtils;
+import org.iplantc.cas.support.oauth.services.OAuthRegisteredService;
 import org.jasig.cas.services.ServicesManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

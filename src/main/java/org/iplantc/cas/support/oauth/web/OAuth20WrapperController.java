@@ -1,12 +1,11 @@
 package org.iplantc.cas.support.oauth.web;
 
 import org.apache.http.HttpStatus;
-import org.jasig.cas.support.oauth.OAuthConstants;
-import org.jasig.cas.support.oauth.OAuthUtils;
+import org.iplantc.cas.support.oauth.OAuthConstants;
+import org.iplantc.cas.support.oauth.OAuthUtils;
 import org.jasig.cas.support.oauth.web.BaseOAuthWrapperController;
 import org.jasig.cas.support.oauth.web.OAuth20AccessTokenController;
 import org.jasig.cas.support.oauth.web.OAuth20ProfileController;
-import org.jasig.cas.support.oauth.web.OAuth20CallbackAuthorizeController;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
