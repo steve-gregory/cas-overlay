@@ -25,7 +25,7 @@ public class OAuth20WrapperController extends BaseOAuthWrapperController impleme
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        authorizeController = new org.jasig.cas.support.oauth.web.OAuth20AuthorizeController(servicesManager, loginUrl);
+        authorizeController = new OAuth20AuthorizeController(servicesManager, loginUrl);
         callbackAuthorizeController = new OAuth20CallbackAuthorizeController();
         accessTokenController = new OAuth20AccessTokenController(servicesManager, ticketRegistry, timeout);
         profileController = new OAuth20ProfileController(ticketRegistry);
