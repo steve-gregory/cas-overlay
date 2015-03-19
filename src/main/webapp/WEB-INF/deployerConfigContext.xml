@@ -347,6 +347,15 @@
               p:id="20" p:name="Troposphere On Euca1" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_euca1" p:clientSecret="troposphere_secret"
               p:serviceId="https://euca1.iplantc.org/cas/oauth2.0" p:evaluationOrder="20" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="21" p:name="Atmosphere On Castorp" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_castorp" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://castorp.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="21" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="22" p:name="Troposphere On Castorp" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_castorp" p:clientSecret="troposphere_secret"
+              p:serviceId="https://castorp.iplantc.org/cas/oauth2.0" p:evaluationOrder="22" />
+
         <!-- END OAuth -->
 
         <bean class="org.jasig.cas.services.RegexRegisteredService"
