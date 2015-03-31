@@ -23,6 +23,8 @@
                             <excludes>
                                 <exclude>WEB-INF/cas.properties</exclude>
                                 <exclude>WEB-INF/cas-servlet.xml</exclude>
+                                <exclude>WEB-INF/classes/cas-theme-default.properties</exclude>
+                                <exclude>WEB-INF/classes/default_views.properties</exclude>
                                 <exclude>WEB-INF/classes/log4j.xml</exclude>
                                 <exclude>WEB-INF/deployerConfigContext.xml</exclude>
                                 <exclude>WEB-INF/spring-configuration.argumentExtractorsConfiguration.xml</exclude>
