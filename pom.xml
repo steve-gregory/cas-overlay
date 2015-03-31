@@ -25,6 +25,7 @@
                                 <exclude>WEB-INF/cas-servlet.xml</exclude>
                                 <exclude>WEB-INF/classes/log4j.xml</exclude>
                                 <exclude>WEB-INF/deployerConfigContext.xml</exclude>
+                                <exclude>WEB-INF/spring-configuration.argumentExtractorsConfiguration.xml</exclude>
                                 <exclude>WEB-INF/view/jsp/protocol/2.0/casServiceValidationSuccess.jsp</exclude>
                             </excludes>
                         </overlay>
@@ -75,6 +76,12 @@
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-oauth</artifactId>
+            <version>${cas.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-saml</artifactId>
             <version>${cas.version}</version>
             <type>jar</type>
         </dependency>

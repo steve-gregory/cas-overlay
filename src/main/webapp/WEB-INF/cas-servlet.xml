@@ -53,6 +53,7 @@
             <util:list>
                 <value>${cas.viewResolver.basename}</value>
                 <value>protocol_views</value>
+                <value>saml_views</value>
             </util:list>
         </property>
     </bean>
@@ -92,6 +93,9 @@
 
                 <!-- Add OAuth -->
                 <prop key="/oauth2.0/*">oauth20WrapperController</prop>
+
+                <!-- Add SAML -->
+                <prop key="/samlValidate">samlValidateController</prop>
             </util:properties>
         </property>
         <!--
@@ -276,4 +280,12 @@
           p:ticketRegistry-ref="ticketRegistry"
           p:timeout="7200" />
     <!-- NOTE: 7200 Seconds == 2 Hours -->
+
+    <bean id="samlValidateController" class="org.jasig.cas.web.ServiceValidateController"
+          p:validationSpecificationClass="org.jasig.cas.validation.Cas20WithoutProxyingValidationSpecification"
+          p:centralAuthenticationService-ref="centralAuthenticationService"
+          p:proxyHandler-ref="proxy20Handler"
+          p:argumentExtractor-ref="samlArgumentExtractor"
+          p:successView="casSamlServiceSuccessView"
+          p:failureView="casSamlServiceFailureView"/>
 </beans>

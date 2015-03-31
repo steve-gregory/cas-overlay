@@ -362,11 +362,6 @@
               p:id="10000001" p:name="HTTP and IMAP" p:description="Allows HTTP(S) and IMAP(S) protocols"
               p:serviceId="^(https?|imaps?)://.*" p:evaluationOrder="10000001"
               p:allowedAttributes-ref="allowedAttributes" p:allowedToProxy="true" />
-
-        <bean class="org.jasig.cas.services.RegexRegisteredService"
-              p:id="10000002" p:name="CoGe" p:description="Allows CoGe"
-              p:serviceId="^https://geco\.iplantcollaborative\.org/mbomhoff/coge/index\.pl" p:evaluationOrder="10000002"
-              p:allowedAttributes-ref="allowedAttributes" p:allowedToProxy="true" />
     </util:list>
 
     <!-- Defines which attributes may be released. -->
