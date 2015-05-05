@@ -15,8 +15,8 @@ because the CAS classes themselves are marked as `final`.
 ## Configuration and Source Updates
 
 Configuration files can be updated directly in this repository. For deployment-specific updates,
-please use the appropriate branch. For example, the CAS server deployment on `robin` can be found
-in the `robin` branch.
+please use the appropriate branch. For example, the CAS server deployment on `henderson` can be
+found in the `henderson` branch.
 
 After adding a new source or configuration file, examine the stock CAS deployment to see if a file
 with the same name and path exists. If so, it is necessary to update the `pom.xml` file to add an
