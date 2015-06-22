@@ -389,6 +389,11 @@
               p:clientId="troposphere_vm64-164" p:clientSecret="troposphere_secret"
               p:serviceId="https://vm64-164.iplantc.org/cas/oauth2.0" p:evaluationOrder="24" />
 
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="25" p:name="Weather Balloon on Monarch" p:description="Weather Balloon - Monitoring the Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="weather_balloon_monarch" p:clientSecret="weather_balloon_secret"
+              p:serviceId="https://vm64-164.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="25" />
+
         <!-- END OAuth -->
 
         <bean class="org.jasig.cas.services.RegexRegisteredService"
