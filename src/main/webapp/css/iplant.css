@@ -48,8 +48,8 @@ http://www.positioniseverything.net/easyclearing.html and http://www.ejeliot.com
 
 
 /* HEADER --------------------------------- */
-#header {position:relative; top:0; left:0; padding-top:84px; background:#fff url(../images/iplant_logo.png) no-repeat scroll 25px 10px;}
-#header h1#app-name {height:35px; clear:both; padding:0 0 0 25px; background:#0098aa; color:#fff; font:normal 400 2.8em/1.2em Georgia,"Times New Roman", serif;}
+#header {position:relative; top:0; left:0; padding-top:84px; background:#fff url(../images/cyverse_auth_logo.png) no-repeat scroll 25px 10px;}
+#header h1#app-name {height:35px; clear:both; padding:0 0 0 25px; background:#185DA2; color:#fff; font:normal 400 2.8em/1.2em Georgia,"Times New Roman", serif;}
 
 /* CONTENT --------------------------------- */
 #content {clear:both; padding:1px 0; margin:0 25px 2em;}
@@ -96,5 +96,5 @@ input.error {background:#FFEFEF; color:#b00;}
 .error {background:#ffefef;}
 input.required {border-width:1px;}
 
-a:link, a:visited {color:#0098aa;text-decoration:none;border-bottom:1px;border-style:none;}
-a:active, a:hover {color:#0098aa;text-decoration:none;border-bottom:1px;border-style:solid;}
+a:link, a:visited {color:#2989E6;text-decoration:none;border-bottom:1px;border-style:none;}
+a:active, a:hover {color:#2989E6;text-decoration:none;border-bottom:1px;border-style:solid;}

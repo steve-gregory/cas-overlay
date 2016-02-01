@@ -59,7 +59,7 @@
           <div class="box fl-panel" id="gray_box">
              <h2>Additional Help?</h2>
 	     <p><a href="http://user.iplantcollaborative.org/reset/request">Need to reset your password?</a></p>
-	     <p><a href="mailto:support@iplantcollaborative.org">Contact Support</a></p>
+	     <p><a href="mailto:support@cyverse.org">Contact Support</a></p>
 	     <p><a href="http://ask.iplantcollaborative.org">Other questions?</a></p>
           </div>
 
