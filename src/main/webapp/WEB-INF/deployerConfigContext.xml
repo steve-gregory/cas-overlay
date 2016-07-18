@@ -113,6 +113,7 @@
             <map>
                 <entry key="givenName" value="firstName" />
                 <entry key="sn" value="lastName" />
+                <entry key="cn" value="name" />
                 <entry key="mail" value="email" />
             </map>
         </property>
@@ -238,6 +239,7 @@
             <map>
                 <entry key="givenName" value="firstName" />
                 <entry key="sn" value="lastName" />
+                <entry key="cn" value="name" />
                 <entry key="mail" value="email" />
             </map>
         </property>
@@ -406,6 +408,7 @@
         <value>uid</value>
         <value>firstName</value>
         <value>lastName</value>
+        <value>name</value>
         <value>email</value>
         <value>entitlement</value>
     </util:list>
