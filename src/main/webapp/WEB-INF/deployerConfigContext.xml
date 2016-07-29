@@ -334,11 +334,11 @@
               p:id="10" p:name="Troposphere On Atmo-Beta" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmobeta" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmobeta.iplantc.org/cas/oauth2.0" p:evaluationOrder="10" />
-        <bean class="org.cyverse.cas.support.oauth.services.OAuthRegisteredService"
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="9" p:name="Atmosphere On Atmo-Beta" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_atmobeta" p:clientSecret="atmosphere_secret"
               p:serviceId="https://atmobeta.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="9" />
-        <bean class="org.cyverse.cas.support.oauth.services.OAuthRegisteredService"
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="10" p:name="Troposphere On Atmo-Beta" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmobeta" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmobeta.cyverse.org/cas/oauth2.0" p:evaluationOrder="10" />
@@ -358,11 +358,11 @@
               p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmo-dev" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmo-dev.iplantc.org/cas/oauth2.0" p:evaluationOrder="14" />
-        <bean class="org.cyverse.cas.support.oauth.services.OAuthRegisteredService"
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="13" p:name="Atmosphere On Atmo-Dev" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_atmo-dev" p:clientSecret="atmosphere_secret"
               p:serviceId="https://atmo-dev.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="13" />
-        <bean class="org.cyverse.cas.support.oauth.services.OAuthRegisteredService"
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmo-dev" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmo-dev.cyverse.org/cas/oauth2.0" p:evaluationOrder="14" />
