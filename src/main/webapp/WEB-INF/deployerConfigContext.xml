@@ -325,6 +325,14 @@
               p:clientId="troposphere_atmo" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmo.iplantcollaborative.org/cas/oauth2.0" p:evaluationOrder="8" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="7" p:name="Atmosphere On Atmo" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_atmo" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://atmo.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="7" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="8" p:name="Troposphere On Atmo" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_atmo" p:clientSecret="troposphere_secret"
+              p:serviceId="https://atmo.cyverse.org/cas/oauth2.0" p:evaluationOrder="8" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="9" p:name="Atmosphere On Atmo-Beta" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_atmobeta" p:clientSecret="atmosphere_secret"
               p:serviceId="https://atmobeta.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="9" />
