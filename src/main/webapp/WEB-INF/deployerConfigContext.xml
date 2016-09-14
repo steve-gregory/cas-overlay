@@ -410,6 +410,16 @@
               p:id="25" p:name="Weather Balloon on Monarch" p:description="Weather Balloon - Monitoring the Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="weather_balloon_monarch" p:clientSecret="weather_balloon_secret"
               p:serviceId="https://monarch.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="25" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="26" p:name="Troposphere On celery-1"
+              p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_celery-1" p:clientSecret="troposphere_secret"
+              p:serviceId="https://celery-1.iplantc.org/cas/oauth2.0" p:evaluationOrder="26" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="27" p:name="Atmosphere On celery-1"
+              p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_celery-1" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://celery-1.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="27" />
 
         <!-- END OAuth -->
 
