@@ -429,8 +429,7 @@
               p:id="29" p:name="Troposphere on Jetstream Test Cloud"
               p:description="Troposphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_jetstreamtestcloud" p:clientSecret="hai2ees1Ohchiib3"
-              p:serviceId="https://atmosphere.jetstreamtestcloud.cyverse.org/cas/oauth2.0" p:evaluation
-Order="29" />
+              p:serviceId="https://atmosphere.jetstreamtestcloud.cyverse.org/cas/oauth2.0" p:evaluationOrder="29" />
 
 
         <!-- END OAuth -->
