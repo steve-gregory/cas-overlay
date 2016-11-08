@@ -424,12 +424,12 @@
               p:id="28" p:name="Atmosphere on Jetstream Test Cloud"
               p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_jetstreamtestcloud" p:clientSecret="chuedeshe7UH3FkG"
-              p:serviceId="https://atmosphere.jetstreamtestcloud.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="28" />
+              p:serviceId="https://atmosphere-jetstreamtestcloud.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="28" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="29" p:name="Troposphere on Jetstream Test Cloud"
               p:description="Troposphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_jetstreamtestcloud" p:clientSecret="hai2ees1Ohchiib3"
-              p:serviceId="https://atmosphere.jetstreamtestcloud.cyverse.org/cas/oauth2.0" p:evaluationOrder="29" />
+              p:serviceId="https://atmosphere-jetstreamtestcloud.cyverse.org/cas/oauth2.0" p:evaluationOrder="29" />
 
 
         <!-- END OAuth -->
