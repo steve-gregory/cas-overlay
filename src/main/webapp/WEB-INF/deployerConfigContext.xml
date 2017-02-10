@@ -113,6 +113,7 @@
             <map>
                 <entry key="givenName" value="firstName" />
                 <entry key="sn" value="lastName" />
+                <entry key="cn" value="name" />
                 <entry key="mail" value="email" />
             </map>
         </property>
@@ -238,6 +239,7 @@
             <map>
                 <entry key="givenName" value="firstName" />
                 <entry key="sn" value="lastName" />
+                <entry key="cn" value="name" />
                 <entry key="mail" value="email" />
             </map>
         </property>
@@ -341,6 +343,14 @@
               p:clientId="troposphere_atmobeta" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmobeta.iplantc.org/cas/oauth2.0" p:evaluationOrder="10" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="9" p:name="Atmosphere On Atmo-Beta" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_atmobeta" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://atmobeta.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="9" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="10" p:name="Troposphere On Atmo-Beta" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_atmobeta" p:clientSecret="troposphere_secret"
+              p:serviceId="https://atmobeta.cyverse.org/cas/oauth2.0" p:evaluationOrder="10" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="11" p:name="Atmosphere On Fermin" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_fermin" p:clientSecret="atmosphere_secret"
               p:serviceId="https://fermin.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="11" />
@@ -356,6 +366,14 @@
               p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="troposphere_atmo-dev" p:clientSecret="troposphere_secret"
               p:serviceId="https://atmo-dev.iplantc.org/cas/oauth2.0" p:evaluationOrder="14" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="13" p:name="Atmosphere On Atmo-Dev" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_atmo-dev" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://atmo-dev.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="13" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="14" p:name="Troposphere On Atmo-Dev" p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_atmo-dev" p:clientSecret="troposphere_secret"
+              p:serviceId="https://atmo-dev.cyverse.org/cas/oauth2.0" p:evaluationOrder="14" />
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="15" p:name="Atmosphere On CRUSHBONE" p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="atmosphere_crushbone" p:clientSecret="atmosphere_secret"
@@ -400,6 +418,27 @@
               p:id="25" p:name="Weather Balloon on Monarch" p:description="Weather Balloon - Monitoring the Atmosphere" p:bypassApprovalPrompt="true"
               p:clientId="weather_balloon_monarch" p:clientSecret="weather_balloon_secret"
               p:serviceId="https://monarch.iplantc.org/oauth2.0/callbackAuthorize" p:evaluationOrder="25" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="26" p:name="Troposphere On celery-1"
+              p:description="Troposphere - A GUI for Atmosphere" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_celery-1" p:clientSecret="troposphere_secret"
+              p:serviceId="https://celery-1.cyverse.org/cas/oauth2.0" p:evaluationOrder="26" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="27" p:name="Atmosphere On celery-1"
+              p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_celery-1" p:clientSecret="atmosphere_secret"
+              p:serviceId="https://celery-1.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="27" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="28" p:name="Atmosphere on Jetstream Test Cloud"
+              p:description="Atmosphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="atmosphere_jetstreamtestcloud" p:clientSecret="chuedeshe7UH3FkG"
+              p:serviceId="https://atmosphere-jetstreamtestcloud.cyverse.org/oauth2.0/callbackAuthorize" p:evaluationOrder="28" />
+        <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
+              p:id="29" p:name="Troposphere on Jetstream Test Cloud"
+              p:description="Troposphere OAuth Service" p:bypassApprovalPrompt="true"
+              p:clientId="troposphere_jetstreamtestcloud" p:clientSecret="hai2ees1Ohchiib3"
+              p:serviceId="https://atmosphere-jetstreamtestcloud.cyverse.org/cas/oauth2.0" p:evaluationOrder="29" />
+
 
         <!-- END OAuth -->
 
@@ -414,6 +453,7 @@
         <value>uid</value>
         <value>firstName</value>
         <value>lastName</value>
+        <value>name</value>
         <value>email</value>
         <value>entitlement</value>
     </util:list>

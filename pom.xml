@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.iplantc.core</groupId>
+    <groupId>org.cyverse</groupId>
     <artifactId>cas-overlay</artifactId>
     <packaging>war</packaging>
     <version>4.0.1</version>
-    <name>CAS Overlay for iPlant</name>
-    <url>http://www.iplantcollaborative.org</url>
+    <name>CAS Overlay for CyVerse</name>
+    <url>http://www.cyverse.org</url>
 
     <build>
         <plugins>
