@@ -8,8 +8,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <spring:theme code="mobile.custom.css.file" var="mobileCss" text="" />
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head>
-	    <title>CyVerse Authentication Service</title>
+        <head>
+            <title>CyVerse Authentication Service</title>
         <c:choose>
            <c:when test="${not empty requestScope['isMobile'] and not empty mobileCss}">
                 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
@@ -25,12 +25,12 @@
            </c:otherwise>
         </c:choose>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	    <link rel="icon" href="<c:url value="/favicon.ico" />" type="image/x-icon" />
-	</head>
-	<body id="cas" class="fl-theme-iphone">
+            <link rel="icon" href="<c:url value="/favicon.ico" />" type="image/x-icon" />
+        </head>
+        <body id="cas" class="fl-theme-iphone">
     <div class="flc-screenNavigator-view-container">
         <div class="fl-screenNavigator-view">
             <div id="header" class="flc-screenNavigator-navbar fl-navbar fl-table">
                 <h1 id="app-name" class="fl-table-cell">CyVerse Authentication Service</h1>
-            </div>		
+            </div>
             <div id="content" class="fl-screenNavigator-scroll-container">
