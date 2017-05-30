@@ -403,7 +403,7 @@
         <bean class="org.iplantc.cas.support.oauth.services.OAuthRegisteredService"
               p:id="26" p:name="User Portal on Portal" p:description="User Portal OAuth Service" p:bypassApprovalPrompt="true"
               p:clientId="portal_portal" p:clientSecret="portal_secret"
-              p:serviceId="https://portal.cyverse.org/api/auth/oauth2.0/callbackAuthorize" p:evaluationOrder="26" />
+              p:serviceId="https://user.cyverse.org/api/auth/oauth2.0/callbackAuthorize" p:evaluationOrder="26" />
 
         <!-- END OAuth -->
 
