@@ -10,5 +10,6 @@ overlays/
 .gradle/
 build/
 bin/
+etc/cas/config/cas.properties
 *.iml
 *.log
