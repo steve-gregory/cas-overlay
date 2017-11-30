@@ -70,12 +70,11 @@ header {
 }
 
 header h1 {
-    height: 35px;
-    clear: both;
-    padding:0 0 0 25px;
+    height: 45px;
     background: #185DA2;
     color: white;
-    font: normal 400 2.8em/1.2em Georgia, "Times New Roman", serif;
+    font-family: Georgia, "Times New Roman", serif;
+    padding-left: 20px;
 }
 
 ins {
