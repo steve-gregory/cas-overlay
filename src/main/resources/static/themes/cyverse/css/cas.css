@@ -124,7 +124,7 @@ input, select {
 
 #logo {
     display: block;
-    background: url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/apereo-logo.png) no-repeat;
+    background: url(../images/apereo-logo.png) no-repeat;
     text-indent: -999em;
     float: left;
     height: 100px;
@@ -250,31 +250,31 @@ input, select {
 #msg .errors {
     border-color: #BB0000;
     color: #BB0000;
-    background-image: url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/error.png);
+    background-image: url(../images/error.png);
 }
 
 #msg .success {
     border-color: #390;
     color: #390;
-    background-image: url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/success.png);
+    background-image: url(../images/success.png);
 }
 
 #msg .info {
     border-color: #008;
     color: #008;
-    background-image: url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/info.png);
+    background-image: url(../images/info.png);
 }
 
 #msg .question {
     border-color: #390;
     color: #390;
-    background-image: url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/question.png);
+    background-image: url(../images/question.png);
 }
 
 #msg .warn {
     border-color: #960;
     color: #960;
-    background: #ffbc8f url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/info.png);
+    background: #ffbc8f url(../images/info.png);
 }
 
 .errors {
@@ -283,7 +283,7 @@ input, select {
     padding-left: 100px;
     padding-top: 5px;
     margin-bottom: 5px;
-    background: url(../../../../../../../../../overlays/org.apereo.cas.cas-server-webapp-tomcat-5.1.6/WEB-INF/classes/static/images/error.png) no-repeat 20px center;
+    background: url(../images/error.png) no-repeat 20px center;
 }
 
 /*
