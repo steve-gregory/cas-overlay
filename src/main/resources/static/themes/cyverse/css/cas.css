@@ -16,9 +16,11 @@ Modals
 }
 
 body {
+    min-width:960px;
+    background: white;
+    color: #333;
     font-size: 14px;
     font-family: Verdana, sans-serif;
-    background-color: #153e50;
 }
 
 nav ul {
