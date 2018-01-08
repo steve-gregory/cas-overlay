@@ -78,14 +78,19 @@
             <version>${cas.version}</version>
         </dependency>
         <dependency>
-             <groupId>org.cyverse</groupId>
-             <artifactId>cyverse-cas-server-support-ldap-rfc2307</artifactId>
-             <version>1.0.0</version>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-redis-service-registry</artifactId>
+            <version>${cas.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-redis-ticket-registry</artifactId>
             <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+             <groupId>org.cyverse</groupId>
+             <artifactId>cyverse-cas-server-support-ldap-rfc2307</artifactId>
+             <version>1.0.0</version>
         </dependency>
     </dependencies>
     <properties>
